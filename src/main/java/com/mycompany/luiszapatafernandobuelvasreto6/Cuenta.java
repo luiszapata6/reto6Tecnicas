@@ -14,7 +14,7 @@ public class Cuenta {
     private float saldoDispo;
     private float maxTrans;
     private int dayTrans;
-    private ArrayList <Cuenta> cuentas;
+    private ArrayList <Cuenta> listaCuentas;
     
     public Cuenta(long idCuenta, String pais, String typeDoc, long numDoc, 
             String nomTitu, float saldoDispo, float maxTrans, int dayTrans){
@@ -27,9 +27,13 @@ public class Cuenta {
     this.saldoDispo = saldoDispo;
     this.maxTrans = maxTrans;
     this.dayTrans = dayTrans;
-    this.cuentas = cuentas;
-               
+    this.listaCuentas = listaCuentas;
+    
+    
+    
     }
+               
+    
     
     
     public Cuenta(){
@@ -42,12 +46,12 @@ public class Cuenta {
     this.saldoDispo = 0;
     this.maxTrans = 0;
     this.dayTrans = 0;
-    this.cuentas = null;
+    this.listaCuentas = null;
                
     }
 
     public void setCuentas(ArrayList<Cuenta> cuentas) {
-        this.cuentas = cuentas;
+        this.listaCuentas = cuentas;
     }
     
     public void setIdCuenta(long idCuenta) {
@@ -115,8 +119,34 @@ public class Cuenta {
     }
 
     public ArrayList<Cuenta> getCuentas() {
-        return cuentas;
+        return listaCuentas;
     }
     
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        
+        sb.append("\nNúmero de cuenta: ");
+        sb.append(idCuenta);
+        sb.append("\nPaís: ");
+        sb.append(pais);
+        sb.append("\nTipo de documento del titular: "); 
+        sb.append(typeDoc);
+        sb.append("\nNúmero de documento del titular: ");
+        sb.append(numDoc);
+        sb.append("\nNombre completo del titular: ");
+        sb.append(nomTitu);
+        sb.append("\nSaldo disponible: ");
+        sb.append(saldoDispo);
+        sb.append("\nMonto máximo por transacción:: ");
+        sb.append(maxTrans);
+        sb.append("\nCantidad de operaciones permitidas por día: ");
+        sb.append(dayTrans);
+        
+        return sb.toString();
 
+        
+    }
+
+    
 }
