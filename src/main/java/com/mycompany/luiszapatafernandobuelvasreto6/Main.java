@@ -103,10 +103,42 @@ public class Main {
                    
                    break;
                case 4:
-                   System.out.println("4.");
+                   
+                   System.out.println("\nIngrese el número de cuenta al cuál desea depositar: ");
+                   Long depAcc = input.nextLong();
+                   System.out.println("\nIngrese el monto a depositar: ");
+                   Float depMon = input.nextFloat();
+                   
+                   
+                   for(int k = 0; k < listCuentas.size(); k++){
+                       if(depAcc.equals(listCuentas.get(k).getIdCuenta())){
+                           listCuentas.get(k).setSaldoDispo(listCuentas.get(k).getSaldoDispo()+depMon);
+                           System.out.println("\n***** DEPÓSITO REALIZADO *****");
+                           System.out.println("Saldo disponible: " + listCuentas.get(k).getSaldoDispo() + "\n");
+                       }
+                   
+                   }
+                   
+                   
                    break;
                case 5:
-                   System.out.println("5.");
+                   
+                   System.out.println("\nIngrese el número de cuenta del cuál desea retirar: ");
+                   Long retAcc = input.nextLong();
+                   System.out.println("\nIngrese el monto a retirar: ");
+                   Float retMon = input.nextFloat();
+                   
+                   
+                   for(int k = 0; k < listCuentas.size(); k++){
+                       if(retAcc.equals(listCuentas.get(k).getIdCuenta())){
+                           listCuentas.get(k).setSaldoDispo(listCuentas.get(k).getSaldoDispo()-retMon);
+                           System.out.println("\n***** RETIRO REALIZADO *****");
+                           System.out.println("Saldo disponible: " + listCuentas.get(k).getSaldoDispo() + "\n");
+                       }
+                   
+                   }
+                   
+                   break;
                default:
                    System.out.println("Por favor seleccione una opción válida.\n");
                    break;

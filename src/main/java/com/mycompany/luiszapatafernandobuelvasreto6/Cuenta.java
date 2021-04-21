@@ -140,7 +140,7 @@ public class Cuenta {
         sb.append(saldoDispo);
         sb.append("\nMonto máximo por transacción:: ");
         sb.append(maxTrans);
-        sb.append("\nCantidad de operaciones permitidas por día: ");
+        sb.append("\nOperaciones permitidas por día: ");
         sb.append(dayTrans);
         
         return sb.toString();
