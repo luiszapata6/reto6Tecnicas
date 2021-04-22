@@ -1,15 +1,11 @@
 
 package com.mycompany.luiszapatafernandobuelvasreto6;
 
-import java.util.ArrayList;
-
-
 public class Transaccion extends Cuenta{
     
     String typeTrans;
     String fecha;
     float monto;
-    private ArrayList<Transaccion> listaTrans;
     
     public Transaccion(String typeTrans, String fecha, float monto){
     
@@ -25,7 +21,6 @@ public class Transaccion extends Cuenta{
         this.typeTrans = null;
         this.fecha = null;
         this.monto = 0;
-        this.listaTrans = null;
     
     }
 
@@ -41,12 +36,6 @@ public class Transaccion extends Cuenta{
         this.monto = monto;
     }
 
-    public void setListaTrans(ArrayList<Transaccion> listaTrans) {
-        this.listaTrans = listaTrans;
-    }
-    
-    
-
     public String getTypeTrans() {
         return typeTrans;
     }
@@ -58,24 +47,16 @@ public class Transaccion extends Cuenta{
     public float getMonto() {
         return monto;
     }
-
-    public ArrayList<Transaccion> getListaTrans() {
-        return listaTrans;
-    }
-    
-    
-    
     
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder();
         
-        
-        sb.append("\nTipo de transferencia: ");
+        sb.append("Tipo de transferencia: ");
         sb.append(typeTrans);
         sb.append("\nFecha: ");
         sb.append(fecha);
-        sb.append("\nMonto: "); 
+        sb.append("\nMonto: $"); 
         sb.append(monto);
         
         return sb.toString();

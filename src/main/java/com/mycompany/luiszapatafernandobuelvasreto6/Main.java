@@ -47,14 +47,30 @@ public class Main {
                    Long depAcc = input.nextLong();
                    System.out.println("\nIngrese el monto a depositar: ");
                    Float depMon = input.nextFloat();
+                   System.out.println("\nIngrese el país de la cuenta: ");
+                   input.nextLine();
+                   String paisDep = input.nextLine();
+                   System.out.println("\nIngrese la fecha: ");
+                   String fechaDep = input.nextLine();
                    deposito(listCuentas, depMon, depAcc);
+                   sumarTransaccion(listTrans, depAcc, fechaDep);
+                   listTrans.add(regTransaccion(depAcc, paisDep, "Depósito.", fechaDep, depMon));
+                   mostrarTransacciones(listTrans);
                    break;
                case 5:
                    System.out.println("\nIngrese el número de cuenta del cuál desea retirar: ");
                    Long retAcc = input.nextLong();
                    System.out.println("\nIngrese el monto a retirar: ");
                    Float retMon = input.nextFloat();
+                   System.out.println("\nIngrese el país de la cuenta: ");
+                   input.nextLine();
+                   String paisRet = input.nextLine();
+                   System.out.println("\nIngrese la fecha: ");
+                   String fechaRet = input.nextLine();
                    retiro(listCuentas, retAcc, retMon);
+                   sumarTransaccion(listTrans, retAcc, fechaRet);
+                   listTrans.add(regTransaccion(retAcc, paisRet, "Retiro.", fechaRet, retMon));
+                   mostrarTransacciones(listTrans);
                    break;
                default:
                    System.out.println("Por favor seleccione una opción válida.\n");
@@ -97,8 +113,6 @@ public class Main {
             aux.setSaldoDispo(input.nextFloat());
             System.out.println("Monto máximo por transacción: ");
             aux.setMaxTrans(input.nextInt());
-            System.out.println("Operaciones permitidas por día: ");
-            aux.setDayTrans(input.nextInt());
             return aux;
          }
 
@@ -114,7 +128,7 @@ public class Main {
                 if(acc.equals(array.get(k).getIdCuenta())){
                     array.get(k).setSaldoDispo(array.get(k).getSaldoDispo()+monto);
                     System.out.println("\n***** DEPÓSITO REALIZADO *****");
-                    System.out.println("Saldo disponible: " + array.get(k).getSaldoDispo() + "\n");
+                    System.out.println("\nSaldo disponible: $" + array.get(k).getSaldoDispo() + "\n");
                        }}}
          
          public static void retiro(ArrayList<Cuenta> array, Long acc, Float monto){
@@ -122,8 +136,47 @@ public class Main {
                 if(acc.equals(array.get(k).getIdCuenta())){
                     array.get(k).setSaldoDispo(array.get(k).getSaldoDispo()-monto);
                     System.out.println("\n***** RETIRO REALIZADO *****");
-                    System.out.println("Saldo disponible: $" + array.get(k).getSaldoDispo() + "\n");
+                    System.out.println("\nSaldo disponible: $" + array.get(k).getSaldoDispo() + "\n");
                        }}}
+         
+         public static Transaccion regTransaccion(Long acc, String pais, 
+                 String typeTrans, String Fecha, Float monto){
+             
+             Transaccion auxTrans = new Transaccion();
+
+             auxTrans.setIdCuenta(acc);
+             auxTrans.setPais(pais);
+             auxTrans.setTypeTrans(typeTrans);
+             auxTrans.setFecha(Fecha);
+             auxTrans.setMonto(monto);
+                     
+             return auxTrans;
+             }
+             
+         public static void mostrarTransacciones(ArrayList<Transaccion> array){
+             System.out.println("\n***** TRANSACCIONES REGISTRADAS *****\n");
+             
+             for(int i = 0;i < array.size();i++){
+                System.out.println("\nNúmero de cuenta: " + array.get(i).getIdCuenta());
+                System.out.println("País: " + array.get(i).getPais());
+                System.out.println(array.get(i));      
+         }}
+         
+         public static int sumarTransaccion(ArrayList<Transaccion> array, Long acc, String fecha){
+             
+             int contadorTrans = 1;
+             
+             for(int i = 0; i < array.size(); i++){
+                    if(acc.equals(array.get(i).getIdCuenta()) && fecha.equals(array.get(i).getFecha())){
+                        contadorTrans = contadorTrans + 1;
+                            }}
+             
+         System.out.println("\nTransacciones realizadas con esta cuenta: " + contadorTrans);
+         return contadorTrans;
+         }
+         
+             
+         
    }
 
 

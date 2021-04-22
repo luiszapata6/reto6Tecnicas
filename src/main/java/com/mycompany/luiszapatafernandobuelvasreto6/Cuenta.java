@@ -1,8 +1,6 @@
 
 package com.mycompany.luiszapatafernandobuelvasreto6;
 
-import java.util.ArrayList;
-
 
 public class Cuenta {
     
@@ -14,7 +12,7 @@ public class Cuenta {
     private float saldoDispo;
     private float maxTrans;
     private int dayTrans;
-    private ArrayList <Cuenta> listaCuentas;
+    private int contTrans;
     
     public Cuenta(long idCuenta, String pais, String typeDoc, long numDoc, 
             String nomTitu, float saldoDispo, float maxTrans, int dayTrans){
@@ -27,10 +25,8 @@ public class Cuenta {
     this.saldoDispo = saldoDispo;
     this.maxTrans = maxTrans;
     this.dayTrans = dayTrans;
-    this.listaCuentas = listaCuentas;
     
     }
-
     
     public Cuenta(){
     
@@ -41,15 +37,10 @@ public class Cuenta {
     this.nomTitu = null;
     this.saldoDispo = 0;
     this.maxTrans = 0;
-    this.dayTrans = 0;
-    this.listaCuentas = null;
+    this.dayTrans = 6;
                
     }
 
-    public void setCuentas(ArrayList<Cuenta> cuentas) {
-        this.listaCuentas = cuentas;
-    }
-    
     public void setIdCuenta(long idCuenta) {
         this.idCuenta = idCuenta;
     }
@@ -82,6 +73,8 @@ public class Cuenta {
         this.dayTrans = dayTrans;
     }
 
+
+
     public long getIdCuenta() {
         return idCuenta;
     }
@@ -113,10 +106,6 @@ public class Cuenta {
     public int getDayTrans() {
         return dayTrans;
     }
-
-    public ArrayList<Cuenta> getCuentas() {
-        return listaCuentas;
-    }
     
     @Override
     public String toString(){
@@ -136,13 +125,9 @@ public class Cuenta {
         sb.append(saldoDispo);
         sb.append("\nMonto máximo por transacción:: ");
         sb.append(maxTrans);
-        sb.append("\nOperaciones permitidas por día: ");
-        sb.append(dayTrans);
-        
+        sb.append("\nOperaciones permitidas por día: 6");
+
         return sb.toString();
 
-        
     }
-
-    
 }
