@@ -29,12 +29,8 @@ public class Cuenta {
     this.dayTrans = dayTrans;
     this.listaCuentas = listaCuentas;
     
-    
-    
     }
-               
-    
-    
+
     
     public Cuenta(){
     

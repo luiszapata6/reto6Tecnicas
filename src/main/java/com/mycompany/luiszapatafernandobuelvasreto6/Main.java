@@ -7,13 +7,13 @@ import java.util.Iterator;
 
 
 public class Main {
-    
-        
+
    public static void main(String[] args){
        
     Scanner input = new Scanner(System.in);
     ArrayList <Cuenta> listCuentas = new ArrayList<>();
-   
+    ArrayList <Transaccion> listTrans = new ArrayList<>();
+    
    while(true){
        
        System.out.println("\n********** BIENVENIDO **********\n");
@@ -25,128 +25,108 @@ public class Main {
        System.out.println("5. Realizar retiros.");
        
        var x = input.nextInt();
-        
-       
            switch (x) {
+               
                case 1:
-
-                    Cuenta aux = new Cuenta();
-
-                    System.out.println("\nIngrese los datos de la cuenta que desea agregar: \n");
-                    System.out.println("Número de la cuenta: ");
-                    aux.setIdCuenta(input.nextLong());
-                    input.nextLine();
-                    System.out.println("País: ");
-                    aux.setPais(input.nextLine());
-                    System.out.println("Tipo de documento del titular: ");
-                    aux.setTypeDoc(input.nextLine());
-                    System.out.println("Número de documento del titular: ");
-                    aux.setNumDoc(input.nextLong());
-                    input.nextLine();
-                    System.out.println("Nombre completo del titular: ");
-                    aux.setNomTitu(input.nextLine());
-                    System.out.println("Saldo disponible: ");
-                    aux.setSaldoDispo(input.nextFloat());
-                    System.out.println("Monto máximo por transacción: ");
-                    aux.setMaxTrans(input.nextInt());
-                    System.out.println("Operaciones permitidas por día: ");
-                    aux.setDayTrans(input.nextInt());
-                    listCuentas.add(aux);
-
-                    System.out.println("\n***** CUENTAS REGISTRADAS *****");
-
-                    for(int i = 0; i < listCuentas.size(); i++){
-                        System.out.println(listCuentas.get(i));
-                     }
-
-                    /*Iterator j = listCuentas.iterator();
-                    System.out.println("\nPRUEBA");
-                    while(j.hasNext()){
-                        System.out.println(j.next());
-
-                    }*/
-
+                   listCuentas.add(leerCuenta());
+                   mostrarCuentas(listCuentas);
                    break;
                case 2:
-                   
                    System.out.println("\nIngrese el número de cuenta a eliminar: ");
                    Long deleteAcc = input.nextLong();
-                       
-                   for(int i = 0; i < listCuentas.size(); i++){
-                       if(deleteAcc.equals(listCuentas.get(i).getIdCuenta())){
-                           listCuentas.remove(i);
-                           System.out.println("\n***** CUENTA ELIMINADA *****");
-                       }
-                   }
-                   
-                   System.out.println("\n***** CUENTAS REGISTRADAS *****");
-
-                    for(int i = 0; i < listCuentas.size(); i++){
-                        System.out.println(listCuentas.get(i));
-                     }
-                   
+                   eliminarCuenta(listCuentas, deleteAcc);
+                   mostrarCuentas(listCuentas);
                    break;
-
                case 3:
-                   
                    System.out.println("\nIngrese el número de cuenta a consultar: ");
                    Long saldAcc = input.nextLong();
-                   
-                   for(int j = 0; j < listCuentas.size(); j++){
-                       if(saldAcc.equals(listCuentas.get(j).getIdCuenta())){
-                           System.out.println("\nEl saldo de la cuenta es: $"
-                           + listCuentas.get(j).getSaldoDispo());
-                       }
-                   
-                   }
-                   
-                   
+                   mostrarSaldo(listCuentas, saldAcc);                
                    break;
                case 4:
-                   
                    System.out.println("\nIngrese el número de cuenta al cuál desea depositar: ");
                    Long depAcc = input.nextLong();
                    System.out.println("\nIngrese el monto a depositar: ");
                    Float depMon = input.nextFloat();
-                   
-                   
-                   for(int k = 0; k < listCuentas.size(); k++){
-                       if(depAcc.equals(listCuentas.get(k).getIdCuenta())){
-                           listCuentas.get(k).setSaldoDispo(listCuentas.get(k).getSaldoDispo()+depMon);
-                           System.out.println("\n***** DEPÓSITO REALIZADO *****");
-                           System.out.println("Saldo disponible: " + listCuentas.get(k).getSaldoDispo() + "\n");
-                       }
-                   
-                   }
-                   
-                   
+                   deposito(listCuentas, depMon, depAcc);
                    break;
                case 5:
-                   
                    System.out.println("\nIngrese el número de cuenta del cuál desea retirar: ");
                    Long retAcc = input.nextLong();
                    System.out.println("\nIngrese el monto a retirar: ");
                    Float retMon = input.nextFloat();
-                   
-                   
-                   for(int k = 0; k < listCuentas.size(); k++){
-                       if(retAcc.equals(listCuentas.get(k).getIdCuenta())){
-                           listCuentas.get(k).setSaldoDispo(listCuentas.get(k).getSaldoDispo()-retMon);
-                           System.out.println("\n***** RETIRO REALIZADO *****");
-                           System.out.println("Saldo disponible: " + listCuentas.get(k).getSaldoDispo() + "\n");
-                       }
-                   
-                   }
-                   
+                   retiro(listCuentas, retAcc, retMon);
                    break;
                default:
                    System.out.println("Por favor seleccione una opción válida.\n");
                    break;
                    }
-                }       
+                }  
+   }     
+   
+        public static void mostrarSaldo(ArrayList<Cuenta> array, Long acc){
+            for (int j = 0; j < array.size(); j++) {
+                if (acc.equals(array.get(j).getIdCuenta())) {
+                    System.out.println("\nEl saldo de la cuenta es: $"
+                    + array.get(j).getSaldoDispo());
+                }}}
+   
+        public static void mostrarCuentas(ArrayList<Cuenta> array){
+            System.out.println("\n***** CUENTAS REGISTRADAS *****");
+             for(int i = 0;i < array.size();i++){
+                System.out.println(array.get(i));      
+         }}
+
+        public static Cuenta leerCuenta(){
+            Scanner input = new Scanner(System.in);
+            Cuenta aux = new Cuenta();
+
+            System.out.println("\nIngrese los datos de la cuenta que desea agregar: \n");
+            System.out.println("Número de la cuenta: ");
+            aux.setIdCuenta(input.nextLong());
+            input.nextLine();
+            System.out.println("País: ");
+            aux.setPais(input.nextLine());
+            System.out.println("Tipo de documento del titular: ");
+            aux.setTypeDoc(input.nextLine());
+            System.out.println("Número de documento del titular: ");
+            aux.setNumDoc(input.nextLong());
+            input.nextLine();
+            System.out.println("Nombre completo del titular: ");
+            aux.setNomTitu(input.nextLine());
+            System.out.println("Saldo disponible: ");
+            aux.setSaldoDispo(input.nextFloat());
+            System.out.println("Monto máximo por transacción: ");
+            aux.setMaxTrans(input.nextInt());
+            System.out.println("Operaciones permitidas por día: ");
+            aux.setDayTrans(input.nextInt());
+            return aux;
+         }
+
+         public static void eliminarCuenta(ArrayList<Cuenta> array, Long acc){
+                for(int i = 0; i < array.size(); i++){
+                    if(acc.equals(array.get(i).getIdCuenta())){
+                        array.remove(i);
+                        System.out.println("\n***** CUENTA ELIMINADA *****");
+                            }}}
+         
+         public static void deposito(ArrayList<Cuenta> array, Float monto, Long acc){
+             for(int k = 0; k < array.size(); k++){
+                if(acc.equals(array.get(k).getIdCuenta())){
+                    array.get(k).setSaldoDispo(array.get(k).getSaldoDispo()+monto);
+                    System.out.println("\n***** DEPÓSITO REALIZADO *****");
+                    System.out.println("Saldo disponible: " + array.get(k).getSaldoDispo() + "\n");
+                       }}}
+         
+         public static void retiro(ArrayList<Cuenta> array, Long acc, Float monto){
+            for(int k = 0; k < array.size(); k++){
+                if(acc.equals(array.get(k).getIdCuenta())){
+                    array.get(k).setSaldoDispo(array.get(k).getSaldoDispo()-monto);
+                    System.out.println("\n***** RETIRO REALIZADO *****");
+                    System.out.println("Saldo disponible: $" + array.get(k).getSaldoDispo() + "\n");
+                       }}}
    }
 
 
-   }
+   
     
 
