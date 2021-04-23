@@ -69,11 +69,12 @@ public class Main {
                    String fechaRet = input.nextLine();
                    retiro(listCuentas, retAcc, retMon);
                    sumarTransaccion(listTrans, retAcc, fechaRet);
-                   listTrans.add(regTransaccion(retAcc, paisRet, "Retiro.", fechaRet, retMon));
+                   listTrans.add(regTransaccion(retAcc, paisRet, "Retiro", fechaRet, retMon));
+                   sumarRetiro(listTrans, retAcc, fechaRet, retMon);
                    mostrarTransacciones(listTrans);
                    break;
                default:
-                   throw new UnsupportedOperationException("Ingrese una opción valida");          
+                   System.out.println("Por favor seleccione una opción válida.\n");
                    break;
                    }
                 }  
@@ -171,8 +172,26 @@ public class Main {
                         contadorTrans = contadorTrans + 1;
                             }}
              
-         System.out.println("\nTransacciones realizadas con esta cuenta: " + contadorTrans);
+         System.out.println("\nTransacciones realizadas hoy con esta cuenta: " + contadorTrans);
          return contadorTrans;
+         }
+         
+         public static Float sumarRetiro(ArrayList<Transaccion> array, Long acc, String fecha, Float monto){
+         
+         float contadorRetiro = 0;
+         String typeTrans = "Retiro";
+         
+         
+          for(int i = 0; i < array.size(); i++){
+              System.out.println("prueba");
+                    if(acc.equals(array.get(i).getIdCuenta()) && fecha.equals(array.get(i).getFecha()) && typeTrans.equals(array.get(i).getTypeTrans())){
+                        contadorRetiro = contadorRetiro + array.get(i).getMonto();
+                        System.out.println(contadorRetiro);
+                            }}
+         
+         
+         System.out.println("\nTotal retirado el día de hoy: $" + contadorRetiro);
+         return contadorRetiro;
          }
          
              
