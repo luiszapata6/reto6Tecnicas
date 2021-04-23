@@ -73,7 +73,7 @@ public class Main {
                    mostrarTransacciones(listTrans);
                    break;
                default:
-                   System.out.println("Por favor seleccione una opción válida.\n");
+                   throw new UnsupportedOperationException("Ingrese una opción valida");          
                    break;
                    }
                 }  
