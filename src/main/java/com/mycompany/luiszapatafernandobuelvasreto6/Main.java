@@ -1,3 +1,5 @@
+/* Luis Fernando Zapata
+   Fernando Jose Buelvas */
 
 package com.mycompany.luiszapatafernandobuelvasreto6;
 
@@ -183,10 +185,8 @@ public class Main {
          
          
           for(int i = 0; i < array.size(); i++){
-              System.out.println("prueba");
                     if(acc.equals(array.get(i).getIdCuenta()) && fecha.equals(array.get(i).getFecha()) && typeTrans.equals(array.get(i).getTypeTrans())){
                         contadorRetiro = contadorRetiro + array.get(i).getMonto();
-                        System.out.println(contadorRetiro);
                             }}
          
          
