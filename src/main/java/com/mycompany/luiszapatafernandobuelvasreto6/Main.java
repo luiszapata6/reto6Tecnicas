@@ -174,7 +174,16 @@ public class Main {
          System.out.println("\nTransacciones realizadas con esta cuenta: " + contadorTrans);
          return contadorTrans;
          }
-         
+   
+         public static int sumarRetiro(ArrayList<Transaccion> array, Long acc, String fecha){             
+             int contadorRetiro = 1;             
+             for(int i = 0; i < array.size(); i++){
+                    if(acc.equals(array.get(i).getIdCuenta()) && fecha.equals(array.get(i).getFecha())){
+                        contadorRetiro = ontadorRetiro + 1;
+                            }}
+             
+         System.out.println("\nTRetiros realizados con esta cuenta: " + contadorRetiro);
+         return contadorRetiro;
              
          
    }
